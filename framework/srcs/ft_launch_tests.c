@@ -6,7 +6,7 @@
 /*   By: qho <qho@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 08:55:48 by qho               #+#    #+#             */
-/*   Updated: 2017/02/12 11:13:10 by qho              ###   ########.fr       */
+/*   Updated: 2017/02/12 15:12:58 by qho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	ft_launch_tests(t_unit_test **tests)
 {
 	ft_printf("running tests?\n");
 	t_unit_test *p;
-	pid_t child;
-	int stat;
+	pid_t child, stat;
+	// int stat;
 	
 	p = *tests;
 	ft_printf("%s\n", p->name);
@@ -31,13 +31,12 @@ int	ft_launch_tests(t_unit_test **tests)
 			ft_printf("fork failed"); //again, can we use this?
 		else if (child == 0)
 		{
-			p->f();
+			exit(p->f());
 		}
 		else
-		{
 			wait(&stat);
-			ft_printf("finished tests?");
-		}
+			ft_printf("%d\n", stat);
+			ft_printf("finished tests?\n");
 		p = p->next;
 	}
 	return (0);

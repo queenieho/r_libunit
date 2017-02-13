@@ -5,51 +5,41 @@
 #                                                     +:+ +:+         +:+      #
 #    By: qho <qho@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/02/11 14:56:44 by qho               #+#    #+#              #
-#    Updated: 2017/02/12 13:20:06 by qho              ###   ########.fr        #
+#    Created: 2017/02/12 13:04:36 by qho               #+#    #+#              #
+#    Updated: 2017/02/12 13:10:08 by qho              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-LIB_PATH = /Users/qho/Desktop/libft
-
+NAME = ft_itoab_test.a
 
 CC = gcc
 
-LIB = libunit.a
+CFLAGS += -Wall -Wextra -Werror
 
-CFLAGS = -Wall -Wextra -Werror
+SRC =	00_launcher.c 01_basic_test1.c 02 02_basic_test2.c
 
-SRC = main.c
+OBJ =	$(SRC:.c=.o)
 
-OBJ = $(SRC:.c=.o)
+HEADER = includes
 
-HEADER = 
-
-.PHONY: clean fclean re norm
-
-test:
-	$(MAKE) -C $(LIB_PATH) all
+.PHONY: clean fclean re
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@ar rc $(NAME) $(OBJ)
-	@ranlib $(NAME)
-	@echo "\033[32mCompiled libunit.a"
+	ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)
 
-$(OBJ): $(SRC)
-	$(CC) -c $(FLAGS) $(SRC) -I $(HEADER)
-	@echo "\033[32mCompiled object files"
+$(OBJ) : $(SRC)
+	$(CC) -c $(CFLAGS) $(SRC) -I $(HEADER)
 
 norm:
-	norminette
+	norminette $(SRC) libft.h
 
 clean:
-	@/bin/rm -f $(OBJ)
-	@echo "\033[31mObject files cleaned"
+	/bin/rm -f $(OBJ)
 
 fclean: clean
-	@/bin/rm -f $(NAME)
-	@echo "\033[31mlibunit.a cleaned"
+	/bin/rm -f $(NAME)
 
 re: fclean all

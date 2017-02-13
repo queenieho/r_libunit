@@ -6,7 +6,7 @@
 /*   By: qho <qho@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 08:42:02 by qho               #+#    #+#             */
-/*   Updated: 2017/02/12 11:37:38 by qho              ###   ########.fr       */
+/*   Updated: 2017/02/12 14:04:18 by qho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,43 @@
 #include "../../framework/includes/output.h"
 #include "../../framework/includes/libunit.h"
 
+t_unit_test	*ft_create_list(char *name, int (*f)(void))
+{
+	t_unit_test *list;
+
+	list = (t_unit_test *)malloc(sizeof(t_unit_test));
+	if(list)
+	{
+		list->name = name;
+		list->f = f;
+		list->next = NULL;
+	}
+	return (list);
+}
+
 void	ft_link_test(t_unit_test **list, char *name, int (*f)(void))
 {
 	ft_printf("linking?\n");
-	t_unit_test *new;
 	t_unit_test *ptr;
-
+//	ptr = *list;
 	ptr = *list;
-	new = (t_unit_test *)malloc(sizeof(t_unit_test));
-	if (!new)
-		ft_printf("malloc failed\n"); //can we use error?
+	if (!*list)
+	{
+		// ft_printf("new name: %s\n", new->name);
+		// ft_printf("copying first node!\n");
+		*list = ft_create_list(name, f);
+		// ft_printf("%s\n", list->name);
+	}
 	else
 	{
-		new->name = name;
-		// ft_printf("%s\n", new->name);
-		new->f = f;
-		// new->f();
-	}
-	if (*list == NULL)
-	{
-		
-		ft_printf("copying first node!\n");
-		*list = new;
-		// ft_printf("%s\n", &list->name);
-	}
-	else if (ptr)
-	{
-		ft_printf("theres a list!\n");
-		while (ptr)
+		ft_printf("second node!\n");
+		while (ptr->next)
 		{
-			// ft_printf("is this it?\n");
+			ft_printf("dont print!\n");
 			ptr = ptr->next;
 		}
-		ptr = new;
-		ft_printf("is this it?\n");
+		ptr->next = ft_create_list(name, f);
 	}
-	
-	ft_printf("%s\n", ptr->name);
 
 }
 

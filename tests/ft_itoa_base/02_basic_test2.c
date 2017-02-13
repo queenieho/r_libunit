@@ -6,7 +6,7 @@
 /*   By: qho <qho@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 08:31:37 by qho               #+#    #+#             */
-/*   Updated: 2017/02/12 10:13:59 by qho              ###   ########.fr       */
+/*   Updated: 2017/02/12 14:52:44 by qho              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@ int basic_test2()
 	char *str;
 
 	str = "59";
-	if (strcmp(str, "59") == 0)
+	if (strcmp(str, "50") == 0)
 	{
-		ft_printf("%s\n", str);
+		ft_printf("in test: %s\n", str);
 		return (0);
 	}
 	else /* this dumb test fails */
+	{
+		ft_printf("in test: NOT %s\n", str);
 		return (-1);
+	}
 }
